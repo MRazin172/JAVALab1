@@ -3,7 +3,8 @@
     class Performance {
         private int[] marks;
         int[] mark = new int[10];
-        int n;
+        int n, mode;
+        int[] repetitions = new int[10];
         int count;
 
     public Performance() {
@@ -17,10 +18,10 @@
             for (int i = 0; i < 10; i++) {
                 boolean markValid = false;
 // here we are checking the validity of the mark, mark should not be greater than 100 or lesser than 0
-               
-                    while (!markValid) {
-                    System.out.print("Student " + (i + 1) + ": ");
-                    int enteredMark = scanner.nextInt();
+
+                        while (!markValid) {
+                        System.out.print("Student " + (i + 1) + ": ");
+                        int enteredMark = scanner.nextInt();
 
                     if (enteredMark <= 100 && enteredMark >= 0) {
                         marks[i] = enteredMark;
@@ -53,29 +54,40 @@
     }
 
     int getMode() {
-        int max = 0, val = 0; int count=0;
-        for(int i=0;i<n;i++) {
-            for(int j=0;j<n;j++) {
-                if(mark[j] == mark[i])
-                    ++count;
-            }
-            if(count > max) {
-                max = count;
-                val = mark[i];
-            }
-        }
-        return val;
-    }
-      //  e.g mode=50
+        int[] frequency = new int[10];
+        int k = 0, samples[] = new int[10];
+        for (int i = 0; i < 10; i++) samples[i] = marks[i];
 
+        for (int i = 0; i <= 9; i++)
+            for (int j = i + 1; j <= 9; j++)
+                if (samples[i] == samples[j] && samples[i] != -1) {
+                    repetitions[k] = samples[i];
+                    frequency[k]++;
+                    samples[j] = -1;
+                }
+
+        int maxFrequency = frequency[0], modeIndex = 0;
+        for (int i = 0; i < 10; i++)
+            if (frequency[i] > maxFrequency) {
+                maxFrequency = frequency[i];
+                modeIndex = i;
+            }
+
+        if (maxFrequency == 0) return -1;
+        mode = repetitions[modeIndex];
+        return mode;
+    }
 
     int getFreqAtMode() {
-
-        return count;
-
+        int k = 0;
+        if (mode == -1) mode = getMode();
+        if (mode == -1) return -1;
+        else {
+            for (int i = 0; i < 10; i++)
+                if (mode == marks[i]) k++;
+            return k;
+        }
     }
-
-    // Method to display the result
     public void display() {
         System.out.println("Highest Mark: " + highestMark());
         System.out.println("Least Mark: " + leastMark());
@@ -90,4 +102,4 @@
             performance.readMarks();
             performance.display();
         }
-        }
+    }
