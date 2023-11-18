@@ -1,10 +1,10 @@
-import java.util.Scanner;
-
-class Performance {
-    private int[] marks;
-    int[] mark = new int[10];
-    int n;
-    int count;
+    import java.util.Scanner;
+    
+    class Performance {
+        private int[] marks;
+        int[] mark = new int[10];
+        int n;
+        int count;
 
     public Performance() {
         marks = new int[10];
@@ -17,6 +17,7 @@ class Performance {
             for (int i = 0; i < 10; i++) {
                 boolean markValid = false;
 // here we are checking the validity of the mark, mark should not be greater than 100 or lesser than 0
+               
                 while (!markValid) {
                     System.out.print("Student " + (i + 1) + ": ");
                     int enteredMark = scanner.nextInt();
@@ -68,11 +69,11 @@ class Performance {
       //  e.g mode=50
 
 
-   int getFreqAtMode() {
+    int getFreqAtMode() {
 
         return count;
 
-   }
+    }
 
     // Method to display the result
     public void display() {
@@ -81,12 +82,12 @@ class Performance {
         System.out.println("Mode: " + getMode());
         System.out.println("Mode Frequency: " + getFreqAtMode());
     }
-}
-
-public class Main {
-    public static void main(String[] args) {
-        Performance performance = new Performance();
-        performance.readMarks();
-        performance.display();
     }
-}
+
+    public class Main {
+        public static void main(String[] args) {
+            Performance performance = new Performance();
+            performance.readMarks();
+            performance.display();
+        }
+        }
