@@ -18,7 +18,7 @@
                 boolean markValid = false;
 // here we are checking the validity of the mark, mark should not be greater than 100 or lesser than 0
                
-                while (!markValid) {
+                    while (!markValid) {
                     System.out.print("Student " + (i + 1) + ": ");
                     int enteredMark = scanner.nextInt();
 
